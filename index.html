@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Tarefas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        ul {
+            list-style-type: none; /* Remove os marcadores da lista */
+            padding: 0;
+        }
+        li {
+            cursor: pointer; /* Muda o cursor para indicar que é clicável */
+        }
+        .completed {
+            text-decoration: line-through; /* Efeito de riscado */
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Lista de Tarefas</h1>
+    
+    <form id="taskForm">
+        <input type="text" id="taskInput" placeholder="Adicionar tarefa" required>
+        <button type="submit">Cadastrar Tarefa</button>
+    </form>
+
+    <ul id="taskList">
+        <!-- As tarefas serão adicionadas aqui -->
+    </ul>
+
+    <script>
+        $(document).ready(function() {
+            // 1. Ao submeter o formulário
+            $('#taskForm').on('submit', function(event) {
+                event.preventDefault(); // Impede o envio do formulário
+
+                // Recupera o valor da tarefa
+                const task = $('#taskInput').val();
+
+                // Adiciona a tarefa à lista
+                $('#taskList').append(`<li>${task}</li>`);
+
+                // Limpa o campo de input
+                $('#taskInput').val('');
+            });
+
+            // 3. Ao clicar nos itens da lista
+            $('#taskList').on('click', 'li', function() {
+                $(this).toggleClass('completed'); // Adiciona ou remove a classe
+            });
+        });
+    </script>
+</body>
+</html>
